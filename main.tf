@@ -15,3 +15,13 @@ module "s3_cloudfront" {
   source = "./modules/s3_cloudfront"
 
 }
+
+resource "aws_s3_bucket_object" "index_html" {
+  bucket = aws_s3_bucket.main.id
+  key    = "index.html"
+  source = "index.html"
+}
+
+resource "aws_s3_bucket" "main" {
+  # Configuración del bucket S3
+}
