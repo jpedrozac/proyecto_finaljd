@@ -6,8 +6,8 @@ resource "aws_ecs_cluster" "foo" {
     value = "enabled"
   }
 }
-resource "aws_ecs_task_definition" "service" {
-  family = "service"
+resource "aws_ecs_task_definition" "mongo" {
+  family = "mongo"
   container_definitions = jsonencode([
     {
       name      = "first"
