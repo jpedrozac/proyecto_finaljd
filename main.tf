@@ -1,4 +1,4 @@
-resource "aws_ecs_cluster" "cluster1" {
+resource "aws_ecs_cluster" "foo" {
   name = "white-hart"
 
   setting {
@@ -47,13 +47,13 @@ resource "aws_ecs_task_definition" "service" {
     expression = "attribute:ecs.availability-zone in [us-east-1a, us-east-1b]"
   }
 }
-resource "aws_ecs_service" "servicio1" {
-  name            = "servicio1db"
-  cluster         = aws_ecs_cluster.cluster1.id
-  task_definition = aws_ecs_task_definition.servicio1.arn
+resource "aws_ecs_service" "mongo" {
+  name            = "mongodb"
+  cluster         = aws_ecs_cluster.foo.id
+  task_definition = aws_ecs_task_definition.mongo.arn
   desired_count   = 3
-  iam_role        = aws_iam_role.cluster1.arn
-  depends_on      = [aws_iam_role_policy.cluster1]
+  iam_role        = aws_iam_role.foo.arn
+  depends_on      = [aws_iam_role_policy.foo]
 
   ordered_placement_strategy {
     type  = "binpack"
@@ -61,8 +61,8 @@ resource "aws_ecs_service" "servicio1" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.cluster1.arn
-    container_name   = "servicio1"
+    target_group_arn = aws_lb_target_group.foo.arn
+    container_name   = "mongo"
     container_port   = 80
   }
 
