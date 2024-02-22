@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "service" {
           hostPort      = 80
         }
       ]
-    },
+    }
     {
       name      = "second"
       image     = "service-second"
