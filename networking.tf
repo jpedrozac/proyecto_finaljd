@@ -1,7 +1,7 @@
 resource "aws_vpc" "finaltf" {
-  cidr_block = "10.0.0.0/16"  # Rango de direcciones IP para la VPC
-  enable_dns_support = true   # Habilitar soporte DNS en la VPC
-  enable_dns_hostnames = true # Habilitar nombres de host DNS en la VPC
+  cidr_block = "10.0.0.0/21"  
+  enable_dns_support = true   
+  enable_dns_hostnames = true 
   tags = {
     Name = "finaltf"  
   }
@@ -26,10 +26,10 @@ resource "aws_subnet" "finaltf2" {
   }
 }
 resource "aws_internet_gateway" "salidatf" {
-  vpc_id     = aws_vpc.finaltf.id  #gateway
+  vpc_id     = aws_vpc.finaltf.id  
         
   }
-  # Crear una tabla de rutas
+ 
 resource "aws_route_table" "my_route_table" {
   vpc_id = aws_vpc.finaltf.id
 
