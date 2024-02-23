@@ -105,18 +105,19 @@ resource "aws_ecs_task_definition" "proyecto-svctd" {
     cpu_architecture        = "X86_64"
   }
   network_mode = "awsvpc"
-  cpu          = 1
-  memory       = 3
-  container_definitions = templatefile(
-    "${path.module}/container-definition-01.json",
-    {
-      image         = var.image-01 == "" ? "null" : var.image-01
-      name          = var.name-01 == "" ? "null" : var.name-01
-      essential     = var.essential-01 ? true : false
-      containerPort = var.containerPort-01 == 0 ? "null" : var.containerPort-01
-      hostPort      = var.hostPort-01 == 0 ? "null" : var.hostPort-01
-    }
-  )
+  cpu          = 256
+  memory       = 512
+container_definitions = jsonencode([
+  {
+    name          = "conteinerProyectoFinal",
+    image         = "${aws_ecr_repository.ecr-proyectofinal.repository_url}:latest",
+    cpu           = 256 
+    memory        = 512
+    essential     = true,
+    portMappings  = [{ containerPort = 80, hostPort = 80 }],
+  }
+  ])
+
 }
 resource "aws_ecs_service" "proyecto-svc" {
   name                = var.name-01
