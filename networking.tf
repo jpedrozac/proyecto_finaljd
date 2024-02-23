@@ -38,3 +38,12 @@ resource "aws_route_table" "my_route_table" {
     gateway_id = aws_internet_gateway.salidatf.id
   }
 }
+resource "aws_route_table_association" "public_rt1" {
+  subnet_id = aws_subnet.finaltf1.id
+  route_table_id = aws_route_table.my_route_table.id 
+}
+
+resource "aws_route_table_association" "public_rt2" {
+  subnet_id = aws_subnet.finaltf2.id
+  route_table_id = aws_route_table.my_route_table.id
+}
