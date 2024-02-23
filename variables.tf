@@ -2,10 +2,6 @@ variable "image-01" {
   type = string
   default = "nginx:latest"
 }
-variable "name-01" {
-  type = string
-  default = "name01"
-}
 variable "essential-01" {
   type    = bool
   default = true
