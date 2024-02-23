@@ -108,7 +108,7 @@ resource "aws_ecs_task_definition" "proyecto-svctd" {
   cpu          = 1
   memory       = 3
   container_definitions = templatefile(
-    "${path.module}/templates/container-definition-01.json",
+    "${path.module}/container-definition-01.json",
     {
       image         = var.image-01 == "" ? "null" : var.image-01
       name          = var.name-01 == "" ? "null" : var.name-01
