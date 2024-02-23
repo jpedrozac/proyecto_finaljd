@@ -26,18 +26,18 @@ resource "aws_lb_listener" "proyectolistener" {
 
 }
 # S3
-resource "aws_s3_bucket_acl" "s3_bucket_acl" {
-  bucket = aws_s3_bucket.example.id
-  acl    = "private"
-}
-resource "aws_s3_bucket_public_access_block" "block_public_access" {
-  bucket = aws_s3_bucket.example.id
+#  resource "aws_s3_bucket_acl" "exampleacl" {
+#  bucket = aws_s3_bucket.example.id
+#  acl    = "private"
+#}
+#resource "aws_s3_bucket_public_access_block" "block_public_access" {
+ # bucket = aws_s3_bucket.example.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
+  #block_public_acls       = true
+  #block_public_policy     = true
+  #ignore_public_acls      = true
+  #restrict_public_buckets = true
+#}
 
 #Cloudfront
 resource "aws_cloudfront_origin_access_control" "cloudfront_s3_oac" {
@@ -93,7 +93,7 @@ resource "aws_ecs_cluster_capacity_providers" "proyecto-clustercp" {
   depends_on         = [aws_ecs_cluster.proyecto_cluster]
 }
 resource "aws_ecs_task_definition" "proyecto-svctd" {
-  family                   = var.name-01
+  family                   = "conteinerProyectoFinal"
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
   task_role_arn            = data.aws_iam_role.ecs_task_execution_role.arn
@@ -117,10 +117,10 @@ container_definitions = jsonencode([
 
 }
 resource "aws_ecs_service" "proyecto-svc" {
-  name                = var.name-01
+  name                = "proyecto-svc"
   cluster             = aws_ecs_cluster.proyecto_cluster.id
   task_definition     = aws_ecs_task_definition.proyecto-svctd.arn
-  desired_count       = 0
+  desired_count       = 2
   launch_type         = "FARGATE"
   scheduling_strategy = "REPLICA"
   network_configuration {
@@ -130,7 +130,7 @@ resource "aws_ecs_service" "proyecto-svc" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.proyectolbtg.id
-    container_name   = var.name-01
+    container_name   = "conteinerProyectoFinal"
     container_port   = var.containerPort-01    
   }
   depends_on = [aws_ecs_cluster.proyecto_cluster, aws_ecs_task_definition.proyecto-svctd, aws_security_group.http_sg, aws_subnet.finaltf1, aws_subnet.finaltf2, aws_lb_target_group.proyectolbtg]
