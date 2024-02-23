@@ -28,6 +28,11 @@ jobs:
       - name: Terraform init
         run: terraform init
 
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -var "image-01=${{ vars.IMAGE_ECS }}" -no-color -auto-approve
+        continue-on-error: true
+
       - name: Terraform apply -auto-approve
         run: terraform apply -auto-approve
         

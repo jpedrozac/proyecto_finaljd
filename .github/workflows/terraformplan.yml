@@ -34,6 +34,15 @@ jobs:
       - name: Terraform format
         run: terraform fmt --recursive .  
 
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -var "image-01=${{ vars.IMAGE_ECS }}" -no-color        
+
+      - name: Terraform Show
+        id: show
+        run: terraform show      
+        continue-on-error: true
+
       - name: Terraform plan
         run: terraform plan
         
