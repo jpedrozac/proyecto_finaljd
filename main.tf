@@ -107,7 +107,7 @@ resource "aws_ecs_task_definition" "proyecto-svctd" {
 container_definitions = jsonencode([
   {
     name          = "conteinerProyectoFinal",
-    image         = var.image-01
+    image         = "nginx:latest"
     cpu           = 256 
     memory        = 512
     essential     = true,
