@@ -107,11 +107,7 @@ resource "aws_ecs_task_definition" "proyecto-svctd" {
 container_definitions = jsonencode([
   {
     name          = "conteinerProyectoFinal",
-<<<<<<< HEAD
     image         = var.image-01
-=======
-    image         = "${aws_ecr_repository.proyecto_ecr.repository_url}:latest",
->>>>>>> 9d5fe1f4baff7f09f87b3257e556052cb3c5d79c
     cpu           = 256 
     memory        = 512
     essential     = true,
