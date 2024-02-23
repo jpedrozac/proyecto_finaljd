@@ -125,7 +125,7 @@ resource "aws_ecs_service" "proyecto-svc" {
   launch_type         = "FARGATE"
   scheduling_strategy = "REPLICA"
   network_configuration {
-    security_groups  = [aws_security_group.http_sg.id]
+    security_groups  = [aws_security_group.http_sg.id, aws_security_group.http_sg_egress.id]
     subnets          = [aws_subnet.finaltf1.id, aws_subnet.finaltf2.id]
     assign_public_ip = true
   }
@@ -137,4 +137,9 @@ resource "aws_ecs_service" "proyecto-svc" {
   depends_on = [aws_ecs_cluster.proyecto_cluster, aws_ecs_task_definition.proyecto-svctd, aws_security_group.http_sg, aws_subnet.finaltf1, aws_subnet.finaltf2, aws_lb_target_group.proyectolbtg]
 }
 
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
 
