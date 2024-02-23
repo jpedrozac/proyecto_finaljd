@@ -1,7 +1,7 @@
 #creación de ECR
 
 resource "aws_ecr_repository" "proyecto_ecr" {
-  name                 = "proyecto_final"
+  name                 = "proyecto_ecr"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
