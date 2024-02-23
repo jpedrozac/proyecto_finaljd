@@ -125,7 +125,7 @@ resource "aws_ecs_service" "proyecto-svc" {
   launch_type         = "FARGATE"
   scheduling_strategy = "REPLICA"
   network_configuration {
-    security_groups  = [aws_security_group.http_sg.id, aws_security_group.http_sg_egress.id]
+    security_groups  = [aws_security_group.http_sg.id]
     subnets          = [aws_subnet.finaltf1.id, aws_subnet.finaltf2.id]
     assign_public_ip = true
   }
