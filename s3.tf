@@ -45,14 +45,14 @@ data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
 
     resources = [
 
-      "${aws_s3_bucket.ybucketjd20240223.arn}/*",
+      "${aws_s3_bucket.mybucketjd20240223.arn}/*",
 
     ]
 
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values = [aws_cloudrfronfrtsfoiufhsr.mycloudcxwerw.arn]
+      values = [aws_cloudrfronf_distribution.cloudfront_s3_oac.arn]
     }
     principals {
       type        = "Service"
