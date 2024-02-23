@@ -93,7 +93,7 @@ resource "aws_ecs_cluster_capacity_providers" "proyecto-clustercp" {
   depends_on         = [aws_ecs_cluster.proyecto_cluster]
 }
 resource "aws_ecs_task_definition" "proyecto-svctd" {
-  family                   = conteinerProyectoFinal
+  family                   = "conteinerProyectoFinal"
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
   task_role_arn            = data.aws_iam_role.ecs_task_execution_role.arn
