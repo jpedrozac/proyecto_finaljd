@@ -28,9 +28,9 @@ resource "aws_security_group" "http_sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  
   }
 }
-
 
 resource "aws_security_group_rule" "http_sg_egress" {
   type              = "egress"
