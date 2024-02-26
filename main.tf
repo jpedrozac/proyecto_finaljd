@@ -28,11 +28,11 @@ resource "aws_lb_listener" "proyectolistener" {
 }
 # S3
   resource "aws_s3_bucket_acl" "exampleacl" {
-  bucket = aws_s3_bucket.exampleacl.id
+  bucket = aws_s3_bucket.example.id
   acl    = "private"
 }
 resource "aws_s3_bucket_public_access_block" "block_public_access" {
-  bucket = aws_s3_bucket.exampleacl.id
+  bucket = aws_s3_bucket.example.id
 
   block_public_acls       = true
   block_public_policy     = true
