@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "example" {
   bucket = "mybucketjd20240223"
+  acl    = "private"
 
   tags = {
     Name        = "My bucket"
