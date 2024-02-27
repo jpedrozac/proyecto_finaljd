@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "example" {
   bucket = "mybucketjd20240223"
+  acl    = "private"
 
   tags = {
     Name        = "My bucket"
@@ -55,17 +56,26 @@ data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
     }
   }
 }
-
-locals {
-  s3_origin_id = "S3Originid"
-}
 resource "aws_s3_bucket_public_access_block" "this" {
 
-   bucket                  = aws_s3_bucket.example.id
+   #bucket                  = aws_s3_bucket.example.id
+
+  #block_public_acls       = true
+  #block_public_policy     = true
+  #ignore_public_acls      = true
+  #restrict_public_buckets = true
+
+#}
+#S3 ACL
+  resource "aws_s3_bucket_acl" "exampleacl" {
+  bucket = aws_s3_bucket.example.id
+  acl    = "private"
+}
+resource "aws_s3_bucket_public_access_block" "block_public_access" {
+  bucket = aws_s3_bucket.example.id
 
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
-
 }
