@@ -79,7 +79,6 @@ resource "aws_cloudfront_distribution" "my_distrib" {
   restrictions {
     geo_restriction {
       restriction_type = "none"
-      locations        = []
     }
   }
   depends_on = [aws_s3_bucket.example, aws_cloudfront_origin_access_control.cloudfront_s3_oac]
