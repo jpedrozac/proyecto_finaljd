@@ -8,10 +8,10 @@ resource "aws_s3_bucket" "example" {
   }
 }
 
-resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
-  bucket = aws_s3_bucket.example.id
-  policy = data.aws_iam_policy_document.s3_bucket_policy.json
-}
+#resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
+ # bucket = aws_s3_bucket.example.id
+  #policy = data.aws_iam_policy_document.s3_bucket_policy.json
+#}
 
 data "aws_iam_policy_document" "s3_bucket_policy" {
   statement {
@@ -67,10 +67,10 @@ data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
 
 #}
 #S3 ACL
-  resource "aws_s3_bucket_acl" "exampleacl" {
-  bucket = aws_s3_bucket.example.id
-  acl    = "private"
-}
+ # resource "aws_s3_bucket_acl" "exampleacl" {
+  #bucket = aws_s3_bucket.example.id
+  #acl    = "private"
+#}
 resource "aws_s3_bucket_public_access_block" "block_public_access" {
   bucket = aws_s3_bucket.example.id
 
