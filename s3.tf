@@ -56,7 +56,7 @@ data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
     }
   }
 }
-resource "aws_s3_bucket_public_access_block" "this" {
+#resource "aws_s3_bucket_public_access_block" "this" {
 
    #bucket                  = aws_s3_bucket.example.id
 
