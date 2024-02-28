@@ -8,26 +8,11 @@ resource "aws_s3_bucket" "example" {
   }
 }
 
-#resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
- # bucket = aws_s3_bucket.example.id
-  #policy = data.aws_iam_policy_document.s3_bucket_policy.json
-#}
-
-data "aws_iam_policy_document" "s3_bucket_policy" {
-  statement {
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${aws_s3_bucket.example.arn}/*"]
-    principals {
-      type        = "Service"
-      identifiers = ["cloudfront.amazonaws.com"]
-    }
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceArn"
-      values   = [aws_cloudfront_distribution.my_distrib.arn]
-    }
-  }
+resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
+  bucket = aws_s3_bucket.example.id
+  policy = data.aws_iam_policy_document.s3_bucket_policy.json
 }
+
 data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
 
   policy_id = "PolicyForCloudFrontPrivateContent"
@@ -78,4 +63,12 @@ resource "aws_s3_bucket_public_access_block" "block_public_access" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+}
+
+resource "aws_s3_object" "index_object" {
+  bucket = aws_s3_bucket.example.id
+  key    = "index.html"
+  source = "${path.module}/index.html"
+  etag   = filemd5("${path.module}/index.html")
+  content_type = "text/html"
 }
