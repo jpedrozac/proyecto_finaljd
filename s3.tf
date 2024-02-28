@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "example" {
   bucket = "mybucketjd20240223"
-  acl    = "private"
 
   tags = {
     Name        = "My bucket"
@@ -13,7 +12,7 @@ resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
   policy = data.aws_iam_policy_document.s3_bucket_policy.json
 }
 
-data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
+data "aws_iam_policy_document" "cos3_bucket_policy." {
 
   policy_id = "PolicyForCloudFrontPrivateContent"
   version   = "2008-10-17"
