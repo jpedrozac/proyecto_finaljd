@@ -58,6 +58,7 @@ data "aws_iam_policy_document" "cos3_bucket_policy." {
 #resource "aws_s3_bucket_public_access_block" "block_public_access" {
  # bucket = aws_s3_bucket.example.id
 
+
   #block_public_acls       = true
   #block_public_policy     = true
   #ignore_public_acls      = true
@@ -71,3 +72,6 @@ resource "aws_s3_object" "index_object" {
   etag   = filemd5("${path.module}/index.html")
   content_type = "text/html"
 }
+
+
+
