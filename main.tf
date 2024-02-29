@@ -38,6 +38,7 @@ resource "aws_cloudfront_origin_access_control" "cloudfront_s3_oac" {
 }
 resource "aws_cloudfront_distribution" "my_distrib" {
   enabled = true
+  default_root_object = "index.html"
   origin {
     domain_name              = aws_s3_bucket.example0297.bucket_regional_domain_name
     origin_id                = "bucketPrimary"
@@ -141,7 +142,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role" "ecs_task_role" {
-  name = "role-name-task"
+  name = "ecs_task_role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
 }
