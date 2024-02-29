@@ -145,9 +145,8 @@ resource "aws_iam_role" "ecs_task_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
 }
-#resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
- # role       = aws_iam_role.ecs_task_execution_role.name
-  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-  #policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-#}
 
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+  }
