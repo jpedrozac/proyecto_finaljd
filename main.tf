@@ -126,10 +126,10 @@ resource "aws_ecs_service" "proyecto-svc" {
 
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "role-name"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
  
-  assume_role_policy = <<EOF
 {
- "Version": "2012-10-17",
+ "Version": "2008-10-17",
  "Statement": [
    {
      "Action": "sts:AssumeRole",
@@ -149,7 +149,7 @@ resource "aws_iam_role" "ecs_task_role" {
  
   assume_role_policy = <<EOF
 {
- "Version": "2012-10-17",
+ "Version": "2008-10-17",
  "Statement": [
    {
      "Action": "sts:AssumeRole",
