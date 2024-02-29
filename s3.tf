@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "s3_bucket_policy" {
 
     resources = [
 
-      "${aws_s3_bucket.example0297.arn}/*",
+      "${aws_s3_bucket_example0297_arn}/*",
 
     ]
 
