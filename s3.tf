@@ -1,14 +1,14 @@
-resource "aws_s3_bucket" "example" {
-  bucket = "example"
+resource "aws_s3_bucket" "example0297" {
+  bucket = "example0297"
 
   tags = {
-    Name        = "example"
+    Name        = "example0297"
     Environment = "Dev"
   }
 }
 
 resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.example0297.id
   policy = data.aws_iam_policy_document.s3_bucket_policy.json
 }
 
@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "s3_bucket_policy" {
 
     resources = [
 
-      "${aws_s3_bucket.example.arn}/*",
+      "${aws_s3_bucket.example0297.arn}/*",
 
     ]
 
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "s3_bucket_policy" {
 }
 #resource "aws_s3_bucket_public_access_block" "this" {
 
-   #bucket                  = aws_s3_bucket.example.id
+   #bucket                  = aws_s3_bucket.example0297.id
 
   #block_public_acls       = true
   #block_public_policy     = true
@@ -66,7 +66,7 @@ data "aws_iam_policy_document" "s3_bucket_policy" {
 #}
 
 resource "aws_s3_object" "index_object" {
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.example0297.id
   key    = "index.html"
   source = "${path.module}/index.html"
   etag   = filemd5("${path.module}/index.html")
