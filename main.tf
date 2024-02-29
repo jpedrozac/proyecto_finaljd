@@ -8,7 +8,7 @@ resource "aws_lb" "proyectolb" {
 }
 
 resource "aws_lb_target_group" "proyectolbtg" {
-  name     = "tf-example-lb-tg"
+  name     = "tf-example0297-lb-tg"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.finaltf.id
@@ -39,7 +39,7 @@ resource "aws_cloudfront_origin_access_control" "cloudfront_s3_oac" {
 resource "aws_cloudfront_distribution" "my_distrib" {
   enabled = true
   origin {
-    domain_name              = aws_s3_bucket.example.bucket_regional_domain_name
+    domain_name              = aws_s3_bucket.example0297.bucket_regional_domain_name
     origin_id                = "bucketPrimary"
     origin_access_control_id = aws_cloudfront_origin_access_control.cloudfront_s3_oac.id
   }
@@ -69,7 +69,7 @@ resource "aws_cloudfront_distribution" "my_distrib" {
       restriction_type = "none"
     }
   }
-  depends_on = [aws_s3_bucket.example, aws_cloudfront_origin_access_control.cloudfront_s3_oac]
+  depends_on = [aws_s3_bucket.example0297, aws_cloudfront_origin_access_control.cloudfront_s3_oac]
 }
 #ECS
 resource "aws_ecs_cluster" "proyecto_cluster" {
