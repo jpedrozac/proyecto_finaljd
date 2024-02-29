@@ -125,7 +125,7 @@ resource "aws_ecs_service" "proyecto-svc" {
 }
 
 resource "aws_iam_role" "ecs_task_execution_role" {
-  name = "role-name"
+  name               = "sange-app-ecs_task_execution_role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
 }
